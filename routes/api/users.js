@@ -13,7 +13,7 @@ const User = require('../../models/User')
 /**
  * @route POST api/users
  * @desc Create User
- * @access Private
+ * @access Public
  */
 
 router.post('/', 
