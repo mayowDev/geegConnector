@@ -1,0 +1,4 @@
+{
+    "mongoURI":"mongodb+srv://mayowdev:devconnector1231@devconnector.legbt.mongodb.net/devcon?retryWrites=true&w=majority",
+    "jwtSecret": "hgsdjshdjshadjhsadsaj21112213!@#"
+}

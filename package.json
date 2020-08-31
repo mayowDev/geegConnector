@@ -1,7 +1,7 @@
 {
   "name": "devconnector",
   "version": "1.0.0",
-  "description": "Social network for devleopers built with MERN Stack",
+  "description": "Social network for developers built with MERN Stack",
   "main": "server.js",
   "scripts": {
     "start": "node server",
@@ -11,6 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "config": "^3.3.1",
     "express": "^4.17.1",
     "express-validator": "^6.6.1",
     "gravatar": "^1.8.1",
