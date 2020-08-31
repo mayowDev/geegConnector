@@ -12,7 +12,7 @@ module.exports = function(req,res,next){
         next()
     }catch(err){
         res.status(401).json({msg: 'Token is not valid'})
-        console.error(err)
+        console.error(err.message)
         
     }
     
