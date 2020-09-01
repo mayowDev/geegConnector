@@ -1,4 +1,6 @@
 {
     "mongoURI":"mongodb+srv://mayowdev:devconnector1231@devconnector.legbt.mongodb.net/devcon?retryWrites=true&w=majority",
-    "jwtSecret": "hgsdjshdjshadjhsadsaj21112213!@#"
+    "jwtSecret": "hgsdjshdjshadjhsadsaj21112213!@#",
+    "githubClientId":"21e829a05758748f367d",
+    "githubClientSecret": "7d963768e8b9be9fc0a4c67e0d124d49626af021"
 }
