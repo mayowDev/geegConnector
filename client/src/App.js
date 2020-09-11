@@ -10,13 +10,15 @@ import Navbar from './components/layout/Navbar'
 import Landing from './components/layout/Landing';
 import Alert from './components/layout/Alert';
 import Dashboard from './components/dashboard/Dashboard';
+import EditProfile from './components/profile-forms/EditProfile';
+import CreateProfile from './components/profile-forms/CreateProfile';
 import PrivateRoute from './components/routing/PrivateRoute';
 
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 
 import './App.css'
-import CreateProfile from './components/profile-forms/CreateProfile';
+
 
 
 if(localStorage.token){
@@ -40,6 +42,7 @@ const App = () => {
           <Route exact path='/login' component={Login}/>
           <PrivateRoute exact path='/dashboard' component={Dashboard}/>
           <PrivateRoute exact path='/create-profile' component={CreateProfile}/>
+          <PrivateRoute exact path='/edit-profile' component={EditProfile}/>
         </Switch>
       </section>
     </Fragment>
