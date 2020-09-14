@@ -33,7 +33,6 @@ router.get('/', auth, async (req, res) => {
  * @desc Login User
  * @access Public
  */
-
 router.post('/', 
     [   
         // express-validator
@@ -51,13 +50,13 @@ router.post('/',
         let user = await User.findOne({email})
         // see if user exits
         if(!user){
-           return res.status(400).json({errors: [{msg: 'invalid credntials'}]})
+           return res.status(400).json({errors: [{msg: 'Invalid credntials'}]})
         }
         
         // make sure password matchs with bcrypt
         const passMatch = await bcrypt.compare(password, user.password)
         if(!passMatch){
-            return res.status(400).json({errors: [{msg: 'invalid credntials'}]})
+            return res.status(400).json({errors: [{msg: 'Invalid credntials'}]})
         }
         // retutn jsonwebtoken
         const paylod= {
