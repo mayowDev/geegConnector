@@ -38,7 +38,7 @@ const EditProfile = props => {
             instagram: loading || !profile.social? '' : profile.social.instagram,
             linkedin: loading || !profile.social? '' : profile.social.linkedin,
         })
-    }, [loading])
+    }, [getProfile, loading])
   
     const {
         company,

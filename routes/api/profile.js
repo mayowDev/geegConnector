@@ -108,11 +108,9 @@ router.get('/me', auth, async (req, res) => {
         }catch(err){
             console.error(err.message)
             res.status(400).send('server error')
-        }
-        
+        }      
     }
  )
-
  
 /**
  * @route GET api/profile
