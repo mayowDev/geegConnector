@@ -12,21 +12,21 @@ const PostItem = props => {
         <Fragment>
             <div class="post bg-white p-1 my-1">
         <div>
-          <a href="profile.html">
+          <Link to={`/profile/${user}`}>
             <img
               class="round-img"
               src={avatar}
               alt=""
             />
             <h4>{name}</h4>
-          </a>
+          </Link>
         </div>
         <div>
           <p class="my-1">
             {text}
           </p>
            <p class="post-date">
-                Posted on <Moment format='DD/MM/YYY'>{date}</Moment>
+                Posted on <Moment format='DD/MM/YYYY'>{date}</Moment>
           </p>
           <button type="button" class="btn btn-light" onClick={e=> addLike(_id)}>
             <i class="fa fa-thumbs-up"/>{' '}
