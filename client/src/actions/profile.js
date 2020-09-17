@@ -14,7 +14,7 @@ export const getProfile = () => async dispatch =>{
     } catch (err) {
         dispatch({
             type:PROFILE_ERROR,
-            payload: {msg: err.response.data.statusText, status: err.response.status}
+            payload: {msg: err.response.statusText, status: err.response.status}
         })
     }
 }
@@ -31,7 +31,7 @@ export const getProfiles = () => async dispatch =>{
     } catch (err) {
         dispatch({
             type:PROFILE_ERROR,
-            payload: {msg: err.response.data.statusText, status: err.response.status}
+            payload: {msg: err.response.statusText, status: err.response.status}
         })
     }
 }
@@ -49,7 +49,7 @@ export const getProfileById = userId => async dispatch =>{
     } catch (err) {
         dispatch({
             type:PROFILE_ERROR,
-            payload: {msg: err.response.data.statusText, status: err.response.status}
+            payload: {msg: err.response.statusText, status: err.response.status}
         })
     }
 }
@@ -66,7 +66,7 @@ export const getGithubRepos = username => async dispatch =>{
     } catch (err) {
         dispatch({
             type:PROFILE_ERROR,
-            payload: {msg: err.response.data.statusText, status: err.response.status}
+            payload: {msg: err.response.statusText, status: err.response.status}
         })
     }
 }
@@ -96,7 +96,7 @@ export const createProfile =(formData, history, edit = false)=> async dispatch =
         }
         dispatch({
             type:PROFILE_ERROR,
-            payload: {msg: err.response.data.statusText, status: err.response.status}
+            payload: {msg: err.response.statusText, status: err.response.status}
         })
         
     }
