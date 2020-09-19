@@ -5,15 +5,17 @@ import Spinner from '../layout/Spinner'
 import PostItem from '../posts/PostItem'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import CommentForm from './CommentForm'
 
 
-const Post = ({post:{post, loading}, match, getPost}) => {
+const Post = ({ post:{post, loading}, match, getPost}) => {
     useEffect(()=>{
         getPost(match.params.id)
     }, [getPost])
     return loading  || post === null ? <Spinner/>: <Fragment>
         <Link to='/posts' className='btn'>Back To Posts</Link>
         <PostItem post={post} showActions={false}/>
+        <CommentForm postId={post._id}/>
     </Fragment>
         
     
