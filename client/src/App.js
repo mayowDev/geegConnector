@@ -17,6 +17,7 @@ import AddEducation from './components/profile-forms/AddEducation';
 import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile/Profile';
 import Posts from './components/posts/Posts';
+import Post from './components/post/Post';
 
 // auth
 import Register from './components/auth/Register';
@@ -49,6 +50,7 @@ const App = () => {
           <Route exact path='/login' component={Login}/>
           <Route exact path='/profiles' component={Profiles}/>
           <Route exact path='/posts' component={Posts}/>
+          <Route exact path='/posts/:id' component={Post}/>
           <Route exact path='/profile/:id' component={Profile}/>
           <PrivateRoute exact path='/dashboard' component={Dashboard}/>
           <PrivateRoute exact path='/create-profile' component={CreateProfile}/>

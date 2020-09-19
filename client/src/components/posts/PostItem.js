@@ -6,7 +6,7 @@ import Moment from 'react-moment'
 import {addLike, deletePost, removeLike} from '../../actions/post'
 
 const PostItem = props => {
-    const {auth, addLike, removeLike, deletePost,
+    const {auth, addLike, removeLike, deletePost, showActions,
       post:{_id, user, avatar, name, comments, likes, text, date }}= props;
     return (
         <Fragment>
@@ -28,33 +28,41 @@ const PostItem = props => {
            <p class="post-date">
                 Posted on <Moment format='DD/MM/YYYY'>{date}</Moment>
           </p>
-          <button type="button" class="btn btn-light" onClick={e=> addLike(_id)}>
-            <i class="fa fa-thumbs-up"/>{' '}
-            <span>{likes.length > 0 && <span>{likes.length}</span>}</span>
-                
-          </button>
-          <button type="button" class="btn btn-light" onClick={e=> removeLike(_id)}>
-            <i class="fa fa-thumbs-down"></i>
-          </button>
-          <Link to={`/post/${_id}`} class="btn btn-primary">
-            Comments {' '} 
-            { comments.length > 0 && ( 
-              <span class='comment-count'>{comments.length}</span>
-             )} 
-          </Link>
-          {!auth.loading && user === auth.user._id &&(
-              <button      
-              type="button"
-              class="btn btn-danger"
-              onClick={e=> deletePost(_id)}
-              >
-               <i class="fa fa-times"></i>
-            </button>
-          )}
+          {showActions && 
+            <Fragment>
+              <button type="button" class="btn btn-light" onClick={e=> addLike(_id)}>
+                <i class="fa fa-thumbs-up"/>{' '}
+                <span>{likes.length > 0 && <span>{likes.length}</span>}</span>
+              </button>
+              <button type="button" class="btn btn-light" onClick={e=> removeLike(_id)}>
+                <i class="fa fa-thumbs-down"></i>
+              </button>
+              <Link to={`/posts/${_id}`} class="btn btn-primary">
+                Comments {' '} 
+                { comments.length > 0 && ( 
+                  <span class='comment-count'>{comments.length}</span>
+                )} 
+              </Link>
+              {!auth.loading && user === auth.user._id &&(
+                  <button      
+                  type="button"
+                  class="btn btn-danger"
+                  onClick={e=> deletePost(_id)}
+                  >
+                  <i class="fa fa-times"></i>
+                </button>
+              )}
+
+            </Fragment>}
+          
         </div>
       </div>
      </Fragment>
     )
+}
+
+PostItem.defaultProps = {
+  showActions: true
 }
 
 PostItem.propTypes = {
