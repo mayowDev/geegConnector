@@ -15,7 +15,7 @@ app.use('/api/profile', require('./routes/api/profile'))
 app.use('/api/auth', require('./routes/api/auth'))
 
 // server static assets in production
-if(process.env.NODE_ENV === production){
+if(process.env.NODE_ENV === 'production'){
     // set static folder
     app.use(express.static('client/build'))
     // redirect users with other endpoints
