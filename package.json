@@ -1,5 +1,5 @@
 {
-  "name": "devconnector",
+  "name": "geegConnector",
   "version": "1.0.0",
   "description": "Social network for developers built with MERN Stack",
   "main": "server.js",
