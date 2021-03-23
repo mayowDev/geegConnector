@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-// components
 import Alert from '../layout/Alert';
 import Dashboard from '../dashboard/Dashboard';
 import EditProfile from '../profile-forms/EditProfile';
@@ -13,7 +12,6 @@ import Profile from '../profile/Profile';
 import Posts from '../posts/Posts';
 import Post from '../post/Post';
 import NoFound from '../layout/NoFound';
-// auth
 import Register from '../auth/Register';
 import Login from '../auth/Login';
 import PrivateRoute from '../routing/PrivateRoute';

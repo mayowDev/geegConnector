@@ -1,0 +1,364 @@
+01.MERN Stack front to back 2019 (devconnector) -12hrs - done 
+02.Node with React Fullstack Web Development by Stephen grider - 25.5 hrs
+03.Modern React with Redux [2020 Update] by Stephen grider -52 hrs
+04.Advanced React and Redux 2020 Edition by Stephen grider - 21hrs
+
+A total = 111hrs of course content = 3.5 month
+----------------------------------------------
+05.Node.js, Express, MongoDB & More The Complete Bootcamp 2020 by Jonas - 42 hrs
+06.NodeJS - The Complete Guide (incl. MVC, REST APIs, GraphQL)40hrs(Sequlize part)
+
+
+-----------------------------------------------------------
+
+complete Clever programmer  playlist of making clone apps
+
+- top JS skills needed 2020
+
+1. React Js
+2. Node Js
+3. Git
+4. Redux
+5. TypeScript
+6. FireBase
+7. Rest Api
+-------------------------------------------------------------
+
+
+
+MERN stack ecommerce project - rizwan
+
+- dont build the project in the course, but instead write parts you need and understand
+- then use it to build the front-end of the devcamper project
+- have forums with react reudx handling with users info
+
+-------------------------------------------------------------------
+
+
+Chapter 01.intro
+
+Lesson:1
+
+- social network project
+- register -> profile with different fields, sign in with github, 
+- and pull data from github API
+- comment and likes, forum posting
+
+
+Modern tech used: 
+
+- asyn/await, es6, react hooks, Redux with devtools, JWT, Postman HTTP, 
+- Mongoose Heroku and git deployment, bcrypt password
+
+
+- tech: node ,vscode, git, postman, react-dev-tools, redux-dev-tools
+- vscode extension: bracket pair colorizing, ES7 React/Redux/GraphQl/React-native snippets, prettier
+- 4 mins:prettier settings, and add to you seetings.json to code below
+"emmet.includeLanguages":{
+	"javascript": "javascriptreact"
+}
+
+
+
+Chapter 2. Express & MongoDB Setup - 30mins
+
+Lesson:1 MongodDb Atlas set up
+
+- https://account.mongodb.com  - mongodb atlas 
+
+user: dinnod4@gmail.com
+pass: 25*****a*
+
+Step 1: New project - MERN2019
+Step 2: new cluster - DevConnector
+Step 3: choose the default settings
+Step 4: change the name of the Cluster name devConnector
+Step 4: create new user for Database acces
+databse user: mayowdev
+databse pass: devconnector1231
+Step 5: whitlist IP address(make sure only to whitelist IP's you allow to have acces to the databse for the project)
+
+Lesson2: Install dependencies and basic express Setup
+
+- npm i -D nodemon concurrently
+- npm i express express-validator bcryptjs gravatar jsonwebtoken mongoose
+- bcrypt is used password encryption, config for global variables, gravatar for profile avatars.
+- express-validator = validates data, when we make post request to an api, and dont send required fields 
+- request is a module that make http request to another api
+
+Lesson3. Connecting To MongoDB With Mongoose
+
+-create config folder with db.js and default.json files
+- in db is where we connect mongoose to atlas
+- defaul is all variables are palaced
+
+Lesson 4. Route Files With Express Router and Postman
+
+create routes folder with api directory,and create auth.js, posts.js, profile.js, users.js
+
+Chapter 3 :  User API routes and JWT Authentication
+
+Lesson 1: User model mongoose Schema
+
+create models directory in root, then create user.js
+-express middleware allows us to get data in request.body
+
+Lesson 2: request and body data validation with Express-validator
+
+- in router.post(/) = we check if profided fields are matched the type
+gravatar options passed
+
+d: default
+r: rating = 'mm' default img
+ss: size
+
+to see you photo you must have registered greavatr.com 
+
+most mongoose methods like findById etc, returns promise, so always use async await
+lesson 6: login and user Authentication
+
+- we use bcrypt.compare() . to compare the password in DB and profided one
+
+
+Chapter 4. Profile API Routes - 1.26 hrs
+
+lesson 1 : profile model
+skills will be comma seprated and use react to convert into array then save to database
+
+
+lesson 2: Get current user profile
+
+- the user: req.user.id is pretend to the user field in Profile model
+
+Lesson 3: create and update user profile
+
+what .trim() does ?
+
+
+$set ?
+
+
+* this mongoose server error is caused either async awiat  missing
+
+onverting circular structure to JSON
+    --> starting at object with constructor 'NativeTopology'
+    |     property 's' -> object with constructor 'Object'
+    |     property 'sessionPool' -> object with constructor 'ServerSessionPool'
+    --- property 'topology' closes the circle
+
+Lesson 4: Get all profiles and profile by user id
+
+server error for get all profiles = because i was using ref: 'users' in profile schema
+
+Schema hasn't been registered for model "users".
+Use mongoose.model(name, schema)
+
+Lesson 5: Delete user and related profile 
+Lesson 6 & 7: Add/Delete experience to profile
+
+- you can add an update route if you want, as practice.
+
+* issues with the expereince add and delete: 
+
+it adds duplicate experince with same information but only different id
+it deletes one experience  no from the profile no matter if the id of experince is different
+
+Lesson 8: add and delete education
+lesson 9: get githu repos for username
+
+- created auth in your github account to get client and secret code
+
+https://github.com/settings/applications/1367508
+
+- we use request to make the Api request  to github
+
+Chapter 6 - front-end React - client part
+
+lesson 3 - concurrenty & react setup
+
+$ npm i axios react-router-dom redux react-redux 
+redux-thunk redux-dev-tools-extension moment react-moment
+
+- "proxy":"https://localhost:5000" = adding proxy script in our 
+client/package.json = allows us to skip the https://localhost:500, 
+when ever we send request to api endpoint
+
+Lesson 3 : clean up and initial components
+
+racfe
+
+lesson 4 : clean up and initial components
+
+
+lesson 5- react router set up
+
+auto-rename tag
+
+lesson 6: usestate and register form
+
+lesson 7: resigester user through axios
+
+axios takes three prameters = 'endpoint', body, config
+
+body = containes data we want to send to database and it must be stringfied
+config = is where headers like contnetn-type goes
+endpoint  =  '/api/user'
+
+
+chapter 7- Redux
+
+Lesson 1: the gist of redux
+
+redux = app level state where we can get data in any level of the app
+state->reducer->
+
+
+
+- request data in action (e.g prfile data from server) 
+- reducer decides how the action it's handle  by dispacthing it
+-> put data in redux store ->
+
+- Reducers = auth, profile, alert, post 
+
+
+lesson 2: create redux store
+
+Error: Expected the reducer to be a function.
+
+answer: the index.js in reducers folder is 
+embty, so import the combineReducer
+
+
+lesson 3: alert reducer, action & types
+
+constant or types
+
+filter doesn't delete or filter out a thing, 
+it just return new array
+
+
+- dispacth  allows us to include mulitple  types in one action
+
+lesson 4: alert component and action call
+
+chapter 8: React user Authentication
+
+lesson 1: auth reducer and register action
+
+issue/bag#1: not showing the body errors in front-end
+
+- endpoint we hiting is localhost:3000/api/users 
+- and the erro in chrome is 404, can not POST /api/users
+- either the header is missing/not complete or endpoint is not correct
+
+- solved:bag#1 = just restarted the computer and app worked as expected
+
+lesson 2: load user and set auth token
+
+- create utility/helper funcion that takes the token from localstorage and
+adds to axios headers as x-auth-token
+- we use useEffect in app.js to set the token through ou the app until user logges out
+
+
+Lesson3: user login 
+ auth error, login error, register error all of them 
+  cause to remove the token from local 
+  
+- we use Redirect from react-router-dom to redirect the user to certain
+ page when loged or resigestered
+
+ lesson 4:
+
+ chapter 9 dashboard and profile management
+
+lesson 1: private/protect routes
+
+- create a praivate rouet helper that checks if user is Authenticated
+then redirect to loing if not Authenticated
+
+lesson 2: Prfoile and reducer and get current profile
+
+
+- warning in terminal for Dashboadr.js
+
+[1]   Line 9:8:  React Hook useEffect has a missing dependency: 'getProfile'. 
+Either include it or remove the dependency array. 
+If 'getProfile' changes too often, find the parent component that defines 
+it and wrap that definition in useCallback  react-hooks/exhaustive-deps
+
+lesson 5: create profile
+
+- we pass formdata, history, and edit=false, into our ;
+- history = is object which allows us to redirect to client site 
+after submiting  a form
+
+we cant use redirect in actions, instead we use histoiry.push('/dashboard')
+
+- withRouter = makes the redirect that is stored in the history.push()
+- (withRouter(CreateProfile));
+
+Lesson -7 = add Profile and education
+22 mins
+13 min
+16 min
+
+
+chapter 10 
+lesson 1
+
+dispatch({type: CLEAR_PROFILE}) = putting this before try and catch in get All profiles action
+so it prevents the flash out of past user profile 
+
+
+lesson 4 : profile to get the we get from url  using = props.match.params.id
+
+
+- if you wanna add any new functionality or features to the app, just create reducer, action,  types, component
+thats the follow of th react and redux
+
+chapter 11- Posts and comments
+
+lesson  6:List single post item
+
+the postitem and getsingel post component are same so we use postitem for both of them
+by passing a prop of showAction={false} from  get single post to postItem.js
+and in postItem we check if showactions are true so the component behaves for 
+post item and if showActions are false we made it bahave like single post where 
+actions(likes, delete), are hidden. nad use can comment
+
+
+
+chapter 12 deployment
+
+
+- if you uploading file you need aws/firbase
+- geroku allows maximum 5 applications
+- heroku-cli and git
+
+
+"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client" if production is true
+we cant run npm run build, this script should run after we push to heroku
+
+- redirect the users with und-existing paths in server.js by serving
+the index.html in client/build 
+
+
+lesson 3 deploy to heroku
+
+1-heroku create 
+2-git add .
+3- git commit -m'prepeared for deployment'
+4- go to  heroku app created in your account -> deploy 
+-> copy this ($ heroku git:remote -a NameOfTheApp)
+5- git push heroku master
+6- heroku open = volah !!
+
+fully deployted app = https://geegconnector.herokuapp.com/ 
+
+
+-- if git ignore not ignoring files do these steps below
+
+git add [uncommitted changes you want to keep] && git commit
+git rm -r --cached .
+git add .
+git commit -m "fixed untracked files"

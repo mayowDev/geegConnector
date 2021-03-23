@@ -12,7 +12,7 @@ export const loadUser = () => async dispatch =>{
         setAuthToken(localStorage.token)
     }
     try {
-        const res = await axios.get('/api/auth');
+        const res = await axios.get('/auth');
         dispatch({
             type: USER_LOADED,
             payload:res.data
@@ -29,11 +29,13 @@ export const register = ({ name, email, password}) => async dispatch => {
     const config = {
         headers:{
             'Content-Type': 'application/json'
-        }
+        },
+        withCredentials: true
     }
     const body = JSON.stringify({ name, email, password });
      try {
-         const res = await axios.post('/api/users', body, config)
+         const res = await axios.post('/auth/signup', body, config)
+         console.log('res', res)
          dispatch({
              type: REGISTER_SUCCESS,
              payload: res.data
@@ -56,11 +58,13 @@ export const login = ( email, password ) => async dispatch => {
     const config = {
         headers:{
             'Content-Type': 'application/json'
-        }
+        },
+        withCredentials: true
     }
     const body = JSON.stringify({ email, password });
      try {
-         const res = await axios.post('/api/auth', body, config)
+         const res = await axios.post('/auth/login', body, config)
+         console.log('loged in successfully',res)
          dispatch({
              type: LOGIN_SUCCESS,
              payload: res.data
@@ -68,7 +72,7 @@ export const login = ( email, password ) => async dispatch => {
          dispatch(loadUser());
      } catch(err) {
         const errors = err.response.data.errors;
-        console.log(errors)
+        console.log('sign in err', errors);
         if(errors){
             errors.forEach(e => dispatch(setAlert(e.msg, 'danger', 3000)));
         }

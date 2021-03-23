@@ -7,6 +7,9 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    googleId:{
+        type: String,
+    },
     email: {
         type: String,
         required: true,
@@ -15,7 +18,7 @@ const UserSchema = new Schema({
     },
     password:{
         type: String,
-        required: true,
+        // required: true,
      },
     avatar: {
         type: String
