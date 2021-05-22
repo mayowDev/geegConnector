@@ -119,6 +119,19 @@ img {
 .my-1 {
   margin: 1rem 0;
 }
+.googel-my-1{
+  background: red;
+  color: white;
+  margin: 2rem 0;
+  padding: 1rem 0;
+  width: 20%;
+}
+.googel-my-1  a {
+  text-decoration: none;
+  color: white;
+  margin: 0 1rem;
+
+}
 .my-2 {
   margin: 2rem 0;
 }

@@ -7,13 +7,13 @@ const passport = require('passport')
 const validateLoginInput = require('../validation/login')
 const User = require('../models/User')
 
-router.get('/', auth, authController.testRoute)
+router.get('/me', auth, authController.getMe)
 router.post('/signup', authController.signUp)
 router.post('/login', authController.login)
-
-router.get('/', authController.signInWithGoogle)
-router.get('/', authController.handleGoogleRedirect)
-router.post('/', authController.signInWithGoogle)
+// router.get('/google', authController.signInWithGoogle)
+// router.get('/google/redirect', authController.handleGoogleRedirect)
+router.get('/google', authController.loginWithGoogle);
+router.get('/google/redirect', authController.redirectWithGoogle);
 
 
 //deletAccount

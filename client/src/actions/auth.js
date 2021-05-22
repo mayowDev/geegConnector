@@ -6,13 +6,13 @@ import {
     LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, CLEAR_PROFILE
 } from './types';
 
-// Load user
+// Load current signed in user
 export const loadUser = () => async dispatch =>{
     if(localStorage.token){
         setAuthToken(localStorage.token)
     }
     try {
-        const res = await axios.get('/auth');
+        const res = await axios.get('/auth/me');
         dispatch({
             type: USER_LOADED,
             payload:res.data
@@ -24,7 +24,6 @@ export const loadUser = () => async dispatch =>{
     }
 } 
 
-// register user
 export const register = ({ name, email, password}) => async dispatch => {
     const config = {
         headers:{
@@ -35,7 +34,6 @@ export const register = ({ name, email, password}) => async dispatch => {
     const body = JSON.stringify({ name, email, password });
      try {
          const res = await axios.post('/auth/signup', body, config)
-         console.log('res', res)
          dispatch({
              type: REGISTER_SUCCESS,
              payload: res.data
@@ -53,7 +51,6 @@ export const register = ({ name, email, password}) => async dispatch => {
      }
 }
 
-// login user
 export const login = ( email, password ) => async dispatch => {
     const config = {
         headers:{
@@ -82,7 +79,44 @@ export const login = ( email, password ) => async dispatch => {
      }
 }
 
-// LOGOUT / Clear user profile
+
+export const loginWithGoogle = ()=> async dispatch => {
+    const config = {
+        headers:{'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'https://accounts.google.com/'},
+        withCredentials: true
+    }
+    // const body = JSON.stringify({ email });
+     try {
+        const res = await axios.get('http://localhost:5000/auth/google')
+        console.log('google res', res)
+         dispatch({
+             type: LOGIN_SUCCESS,
+             payload: res.data
+         });
+         dispatch(loadUser());
+     } catch(err) {
+        console.log('google sign in err', err);
+        // const errors = err.response.data.errors;
+        // if(errors){
+        //     errors.forEach(e => dispatch(setAlert(e.msg, 'danger', 3000)));
+        // }
+        dispatch({
+            type: LOGIN_FAIL
+        })
+     }
+}
+
+
+export const fetchUserAction = ()=>{
+    return (dispatch)=>{
+     axios.get('/auth/me')
+     .then((res)=>{
+        dispatch({type:USER_LOADED,payload:res.data})
+     })
+ 
+    }
+ }
+
 export const logout = () => dispatch =>{
     dispatch({type: CLEAR_PROFILE})
     dispatch({type: LOGOUT})

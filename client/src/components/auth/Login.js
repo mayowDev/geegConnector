@@ -2,10 +2,10 @@ import React,{Fragment, useState} from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { login } from '../../actions/auth'
+import { login, loginWithGoogle, fetchUserAction } from '../../actions/auth'
 import axios from 'axios'
 
-const Login = ({login, isAuthenticated}) => {
+const Login = ({login, loginWithGoogle, isAuthenticated}) => {
     const [formData, setFormData] = useState({
         email:'',
         password:''
@@ -23,6 +23,9 @@ const Login = ({login, isAuthenticated}) => {
         console.log('loged success')
         
     };
+    const googleSignIn = () => {
+        loginWithGoogle()
+    }
     // redirect when loged
     if(isAuthenticated){
         return <Redirect to='/dashboard'/>;
@@ -51,6 +54,8 @@ const Login = ({login, isAuthenticated}) => {
                 </div>
                 
                 <input type="submit" className="btn btn-primary" value="Login" />
+                
+                <button type="button" className="btn btn-danger googel-my-1" onClick={googleSignIn} >Sign in with Google </button>
             </form>
             <p className="my-1">
                 Don't have an account? <Link to="/register">Sign Up</Link>
@@ -61,6 +66,7 @@ const Login = ({login, isAuthenticated}) => {
 
 Login.propTypes = {
     login: PropTypes.func.isRequired,
+    loginWithGoogle: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool
 
 }
@@ -68,4 +74,4 @@ Login.propTypes = {
 const mapStateToProps = state =>({
     isAuthenticated: state.auth.isAuthenticated
 });
-export default connect(mapStateToProps, {login})(Login);
+export default connect(mapStateToProps, {login, loginWithGoogle})(Login);

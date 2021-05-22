@@ -10,44 +10,58 @@ const session = require('express-session')
 const cookieParser = require('cookie-parser')
 const passport = require('passport')
 const connectDB = require('./config/db')
+connectDB();
 
 const app = express();
-connectDB();
-// app.use(express.json({ extended: false}));
+
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));//default is true
 
-// app.use(sanitize());
-// app.use(helmet());
-// app.use(xss());
-// app.use(hpp());
-const limiter = rateLimit({
-  windowMs: 10 * 60 * 1000, //10mins
-  max: 100
-});
-// app.use(limiter);
-
-app.use(cors({
-  origin: "http://localhost:3000", //location of react app
-  credentials:true
-}));
-// Sessions
+app.use(cors({ 
+  origin: "http://localhost:3000",
+  credentials: true,     
+  allowHeaders:"Origin, X-Requested-With, Content-Type, Accept"
+}))
+app.set("trust proxy", 1);
 app.use(
   session({
-    // secret: process.env.EXPRES_SESSION_SECRET,
-    secret: 'keyboardcat',
+    secret: "keyboardcat",
     resave: true,
     saveUninitialized: true,
-    // cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
-  })
-)
+    cookie: {
+      sameSite: "none",
+      secure: false,
+      maxAge: 1000 * 60 * 60 * 24 * 7 // One Week
+    }
+  }))
+// Sessions
+// app.use(
+//   session({
+//     // secret: process.env.EXPRES_SESSION_SECRET,
+//     secret: 'keyboardcat',
+//     resave: true,
+//     saveUninitialized: true,
+//     // cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
+//   })
+// )
 app.use(cookieParser('keyboardcat'))//SECRET must be the same as express Sessions
 app.use(passport.initialize())
 app.use(passport.session())
 require('./config/passport')(passport)
 
+app.use('*', function(req, res, next) {
+  //replace localhost:8080 to the ip address:port of your server
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next(); 
+});
+  
+  //enable pre-flight
+// app.options('*', cors());
+
 app.use('/auth', require('./routes/auth.route'))
-// app.use('/users', require('./routes/users.route'))
 app.use('/profile', require('./routes/profile.route'))
 app.use('/posts', require('./routes/posts.route'))
 
@@ -60,3 +74,5 @@ if(process.env.NODE_ENV === 'production'){
 }
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => console.log( `Server started on port ${PORT}`))
+
+module.exports = app

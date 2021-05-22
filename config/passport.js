@@ -10,39 +10,41 @@ const clientId = config.get('googleClientId')
 const clientSecret = config.get('googleClientIdSecret')
 
 module.exports = function (passport) {
-    // passport.use(new GoogleStrategy({
-    //     callbackURL: '/auth/google/redirect',
-    //     clientID : clientId,
-    //     clientSecret : clientSecret
-    //   },
-    //    async (accessToken, refreshToken, profile, done) =>{
-    //       const newUser = {
-    //         name: profile.displayName,
-    //         googleId: profile.id,
-    //         email: profile.emails[0].value,
-    //         avatar: profile.photos[0].value,
-    //       }
-    //       try {
-    //         let user = await User.findOne({ googleId: profile.id });
+    passport.use(new GoogleStrategy({
+        callbackURL: '/auth/google/redirect',
+        clientID : clientId,
+        clientSecret : clientSecret,
+        proxy:true
+      },
+       async (accessToken, refreshToken, profile, done) =>{
+        //  console.log('profile', profile)
+          const newUser = {
+            name: profile.displayName,
+            googleId: profile.id,
+            email: profile.emails[0].value,
+            avatar: profile.photos[0].value,
+          }
+          try {
+            let user = await User.findOne({ googleId: profile.id });
 
-    //         if (user) {
-    //           console.log('user exist', user)
-    //           done(null, user)
-    //         } else {
-    //           user = await User.create(newUser);
-    //           console.log('newuser', user)
-    //           done(null, user)
-    //         }
-    //       } catch (err) {
-    //         console.error(err)
-    //       }
+            if (user) {
+              console.log('user exist', user)
+              done(null, user)
+            } else {
+              user = await User.create(newUser);
+              console.log('newuser', user)
+              done(null, user)
+            }
+          } catch (err) {
+            console.error(err)
+          }
 
-    //     })
-    // )
+        })
+    )
     passport.use(
         new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
             // { usernameField: "email" } = this is required if you using email instead of username
-            const user = User.findOne({ email: email}, (err, user) => {
+            User.findOne({ email: email}, (err, user) => {
               if(err) throw err
               if (!user) {
                 return done(null, false, { message: 'That email is not registered' });
@@ -61,13 +63,14 @@ module.exports = function (passport) {
     
     //stores cookie in browser
     passport.serializeUser((user, cb) => {
-      console.log('serilize',user.id)
-      cb(null, user.id)
+      return cb(null, user.id);
+
+      // cb(null, user.id)
     })
       //take the id in cookie and search in databse
     passport.deserializeUser((id, cb) => {
       User.findOne({_id: id}, (err, user) => {
-        cb(err, user);
+        return cb(null, user);
       })
   });
 }
